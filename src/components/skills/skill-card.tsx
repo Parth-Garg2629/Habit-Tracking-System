@@ -4,18 +4,20 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { SKILL_CATEGORY_LABELS, SKILL_CATEGORY_COLORS } from "@/types/analysis";
+import type { DetectedSkill } from "@/types/analysis";
 import type { Skill } from "@/hooks/use-skills";
 import { calculateLevel } from "@/lib/xp";
 import { cn } from "@/lib/utils";
 
+function getCategory(category: string): DetectedSkill["category"] {
+  return category in SKILL_CATEGORY_LABELS ? (category as DetectedSkill["category"]) : "other";
+}
+
 export function SkillCard({ skill }: { skill: Skill }) {
-  // calculate level dynamically from XP
   const { level, progressPercent, currentLevelXp, xpForNextLevel } = calculateLevel(skill.xp);
-  
-  // @ts-ignore - mapping db category to analysis category style
-  const colorClass = SKILL_CATEGORY_COLORS[skill.category] || SKILL_CATEGORY_COLORS.other;
-  // @ts-ignore
-  const label = SKILL_CATEGORY_LABELS[skill.category] || skill.category || "Skill";
+  const category = getCategory(skill.category);
+  const colorClass = SKILL_CATEGORY_COLORS[category];
+  const label = SKILL_CATEGORY_LABELS[category] || skill.category || "Skill";
 
   return (
     <Card className="hover:border-primary/50 transition-colors">
