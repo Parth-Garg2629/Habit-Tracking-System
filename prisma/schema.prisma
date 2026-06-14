@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model User {
@@ -162,7 +162,7 @@ model QuestCompletion {
   id             String   @id @default(cuid())
   questId        String
   userId         String
-  completionDate DateTime @db.Date
+  completionDate DateTime
   completedAt    DateTime @default(now())
   xpAwarded      Int
   quest          Quest    @relation(fields: [questId], references: [id], onDelete: Cascade)
@@ -202,7 +202,7 @@ model AiAnalysis {
   id             String   @id @default(cuid())
   userId         String
   logContent     String
-  detectedSkills Json
+  detectedSkills String
   totalXpSuggested Int
   summary        String
   status         AnalysisStatus @default(PENDING)

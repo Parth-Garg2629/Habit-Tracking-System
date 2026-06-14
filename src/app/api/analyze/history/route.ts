@@ -18,7 +18,7 @@ export async function GET() {
     analyses: analyses.map((a) => ({
       id: a.id,
       logContent: a.logContent,
-      detectedSkills: a.detectedSkills,
+      detectedSkills: JSON.parse(a.detectedSkills as string),
       totalXpSuggested: a.totalXpSuggested,
       summary: a.summary,
       status: a.status,

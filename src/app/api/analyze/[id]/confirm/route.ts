@@ -33,7 +33,7 @@ export async function POST(
     return NextResponse.json({ error: "Analysis already processed" }, { status: 400 });
   }
 
-  const detectedSkills = analysis.detectedSkills as DetectedSkill[];
+  const detectedSkills = JSON.parse(analysis.detectedSkills as string) as DetectedSkill[];
   const totalXp = analysis.totalXpSuggested;
 
   // Build transaction operations

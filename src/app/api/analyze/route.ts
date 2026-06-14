@@ -43,7 +43,7 @@ export async function POST(request: Request) {
       data: {
         userId,
         logContent: body.content,
-        detectedSkills: analysis.detectedSkills,
+        detectedSkills: JSON.stringify(analysis.detectedSkills),
         totalXpSuggested: analysis.totalXpSuggested,
         summary: analysis.summary,
         status: "PENDING",
