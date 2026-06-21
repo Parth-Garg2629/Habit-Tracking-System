@@ -11,7 +11,7 @@ type AnalysisState =
   | { step: "idle" }
   | { step: "analyzing" }
   | { step: "result"; analysis: AiAnalysisResult }
-  | { step: "confirming" }
+  | { step: "confirming"; analysis: AiAnalysisResult }
   | { step: "confirmed"; result: ConfirmResult }
   | { step: "error"; message: string };
 
@@ -41,7 +41,12 @@ export function useAnalysis() {
   }, []);
 
   const confirm = useCallback(async (analysisId: string) => {
-    setState({ step: "confirming" });
+    setState((prev) => {
+      if (prev.step === "result") {
+        return { step: "confirming", analysis: prev.analysis };
+      }
+      return prev;
+    });
     try {
       const res = await fetch(`/api/analyze/${analysisId}/confirm`, {
         method: "POST",

@@ -64,7 +64,7 @@ export default function DailyLogPage() {
         />
       )}
 
-      {(state.step === "result" || state.step === "confirming") && state.step !== "idle" && "analysis" in state && (
+      {(state.step === "result" || state.step === "confirming") && (
         <AnalysisResultCard
           analysis={state.analysis}
           onConfirm={handleConfirm}

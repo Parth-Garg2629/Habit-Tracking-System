@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import type { AnalyzePayload } from "@/types/analysis";
 
 interface LogFormProps {
-  onSubmit: (payload: AnalyzePayload) => Promise<void>;
+  onSubmit: (payload: AnalyzePayload) => Promise<unknown>;
   isAnalyzing: boolean;
 }
 

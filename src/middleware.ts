@@ -8,6 +8,10 @@ export async function middleware(request: NextRequest) {
   });
 
   if (!token) {
+    // API routes should return JSON 401, not redirect
+    if (request.nextUrl.pathname.startsWith("/api/")) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     const signInUrl = new URL("/sign-in", request.url);
     return NextResponse.redirect(signInUrl);
   }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePlayer } from "@/hooks/use-player";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -12,12 +12,12 @@ export default function SettingsPage() {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
 
-  // Initialize form state once player is loaded
-  useState(() => {
+  // Initialize form state once player data is loaded
+  useEffect(() => {
     if (player?.name) {
       setName(player.name);
     }
-  });
+  }, [player]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,7 +62,7 @@ export default function SettingsPage() {
               <div className="space-y-2">
                 <label className="text-sm font-medium">Display Name</label>
                 <Input
-                  value={name || player?.name || ""}
+                  value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Your Name"
                   disabled={saving}

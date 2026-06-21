@@ -44,7 +44,10 @@ export async function POST(
     if (skill.confidence < 0.3) continue; // Skip low-confidence detections
 
     const existingSkill = await prisma.skill.findFirst({
-      where: { userId, name: { equals: skill.name, mode: "insensitive" } },
+      where: {
+        userId,
+        name: skill.name,
+      },
     });
 
     if (existingSkill) {
