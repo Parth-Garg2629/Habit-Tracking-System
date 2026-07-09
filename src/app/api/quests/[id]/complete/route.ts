@@ -31,7 +31,21 @@ export async function POST(
   }
 
   try {
-    const [completion, , updatedUser] = await prisma.$transaction([
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { xp: true, level: true },
+    });
+
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    const newXp = user.xp + quest.xpReward;
+    const newLevelData = calculateLevel(newXp);
+    const isLevelUp = newLevelData.level > user.level;
+    
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const tx: any[] = [
       prisma.questCompletion.create({
         data: {
           questId: id,
@@ -49,45 +63,42 @@ export async function POST(
       }),
       prisma.user.update({
         where: { id: userId },
-        data: { xp: { increment: quest.xpReward } },
+        data: { 
+          xp: newXp,
+          ...(isLevelUp && { level: newLevelData.level })
+        },
       }),
-    ]);
+    ];
 
-    const newLevelData = calculateLevel(updatedUser.xp);
-    const levelUp =
-      newLevelData.level > updatedUser.level
-        ? { from: updatedUser.level, to: newLevelData.level }
-        : null;
-
-    if (levelUp) {
-      await prisma.$transaction([
-        prisma.user.update({
-          where: { id: userId },
-          data: { level: newLevelData.level },
-        }),
+    if (isLevelUp) {
+      tx.push(
         prisma.levelHistory.create({
           data: {
             userId,
-            fromLevel: updatedUser.level,
+            fromLevel: user.level,
             toLevel: newLevelData.level,
-            totalXp: updatedUser.xp,
+            totalXp: newXp,
           },
-        }),
+        })
+      );
+      tx.push(
         prisma.xpEvent.create({
           data: {
             userId,
             amount: 0,
-            reason: `Level up! ${updatedUser.level} -> ${newLevelData.level}`,
+            reason: `Level up! ${user.level} -> ${newLevelData.level}`,
           },
-        }),
-      ]);
+        })
+      );
     }
+
+    const [completion] = await prisma.$transaction(tx);
 
     return NextResponse.json({
       ...quest,
       completedToday: true,
       xpAwarded: completion.xpAwarded,
-      levelUp,
+      levelUp: isLevelUp ? { from: user.level, to: newLevelData.level } : null,
       resetAt: getNextUtcReset().toISOString(),
     });
   } catch (error) {

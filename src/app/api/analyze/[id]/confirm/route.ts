@@ -23,122 +23,98 @@ export async function POST(
   const userId = session.user.id;
   const { id } = await params;
 
-  const analysis = await prisma.aiAnalysis.findUnique({ where: { id } });
+  try {
+    const result = await prisma.$transaction(async (tx) => {
+      const user = await tx.user.findUnique({ where: { id: userId } });
+      if (!user) throw new Error("User not found");
 
-  if (!analysis || analysis.userId !== userId) {
-    return NextResponse.json({ error: "Analysis not found" }, { status: 404 });
-  }
+      const analysis = await tx.aiAnalysis.findUnique({ where: { id } });
+      if (!analysis || analysis.userId !== userId) throw new Error("Analysis not found");
+      if (analysis.status !== "PENDING") throw new Error("Analysis already processed");
 
-  if (analysis.status !== "PENDING") {
-    return NextResponse.json({ error: "Analysis already processed" }, { status: 400 });
-  }
+      const detectedSkills = JSON.parse(analysis.detectedSkills as string) as DetectedSkill[];
+      const totalXp = analysis.totalXpSuggested;
+      let skillsUpdated = 0;
 
-  const detectedSkills = JSON.parse(analysis.detectedSkills as string) as DetectedSkill[];
-  const totalXp = analysis.totalXpSuggested;
+      for (const skill of detectedSkills) {
+        if (skill.confidence < 0.3) continue;
+        skillsUpdated++;
 
-  // Build transaction operations
-  const operations = [];
+        const existingSkill = await tx.skill.findFirst({
+          where: { userId, name: skill.name },
+        });
 
-  // 1. Update or create skills
-  for (const skill of detectedSkills) {
-    if (skill.confidence < 0.3) continue; // Skip low-confidence detections
+        if (existingSkill) {
+          await tx.skill.update({
+            where: { id: existingSkill.id },
+            data: { xp: { increment: skill.xpSuggested } },
+          });
+        } else {
+          await tx.skill.create({
+            data: {
+              userId,
+              name: skill.name,
+              category: skill.category,
+              xp: skill.xpSuggested,
+            },
+          });
+        }
+      }
 
-    const existingSkill = await prisma.skill.findFirst({
-      where: {
-        userId,
-        name: skill.name,
-      },
-    });
+      const newXp = user.xp + totalXp;
+      const newLevelData = calculateLevel(newXp);
+      const isLevelUp = newLevelData.level > user.level;
 
-    if (existingSkill) {
-      operations.push(
-        prisma.skill.update({
-          where: { id: existingSkill.id },
-          data: { xp: { increment: skill.xpSuggested } },
-        })
-      );
-    } else {
-      operations.push(
-        prisma.skill.create({
+      await tx.user.update({
+        where: { id: userId },
+        data: { xp: newXp, ...(isLevelUp && { level: newLevelData.level }) },
+      });
+
+      await tx.xpEvent.create({
+        data: {
+          userId,
+          amount: totalXp,
+          reason: `AI-analyzed learning: ${analysis.summary.slice(0, 80)}`,
+        },
+      });
+
+      await tx.aiAnalysis.update({
+        where: { id },
+        data: { status: "CONFIRMED", confirmedAt: new Date() },
+      });
+
+      if (isLevelUp) {
+        await tx.levelHistory.create({
           data: {
             userId,
-            name: skill.name,
-            category: skill.category,
-            xp: skill.xpSuggested,
-          },
-        })
-      );
-    }
-  }
-
-  // 2. Award XP to user
-  operations.push(
-    prisma.user.update({
-      where: { id: userId },
-      data: { xp: { increment: totalXp } },
-    })
-  );
-
-  // 3. Create XP event
-  operations.push(
-    prisma.xpEvent.create({
-      data: {
-        userId,
-        amount: totalXp,
-        reason: `AI-analyzed learning: ${analysis.summary.slice(0, 80)}`,
-      },
-    })
-  );
-
-  // 4. Mark analysis as confirmed
-  operations.push(
-    prisma.aiAnalysis.update({
-      where: { id },
-      data: { status: "CONFIRMED", confirmedAt: new Date() },
-    })
-  );
-
-  await prisma.$transaction(operations);
-
-  // Check for level-up
-  const updatedUser = await prisma.user.findUnique({
-    where: { id: userId },
-    select: { xp: true, level: true },
-  });
-
-  let levelUp = null;
-  if (updatedUser) {
-    const newLevelData = calculateLevel(updatedUser.xp);
-    if (newLevelData.level > updatedUser.level) {
-      levelUp = { from: updatedUser.level, to: newLevelData.level };
-      await prisma.$transaction([
-        prisma.user.update({
-          where: { id: userId },
-          data: { level: newLevelData.level },
-        }),
-        prisma.levelHistory.create({
-          data: {
-            userId,
-            fromLevel: updatedUser.level,
+            fromLevel: user.level,
             toLevel: newLevelData.level,
-            totalXp: updatedUser.xp,
+            totalXp: newXp,
           },
-        }),
-        prisma.xpEvent.create({
+        });
+        await tx.xpEvent.create({
           data: {
             userId,
             amount: 0,
-            reason: `Level up! ${updatedUser.level} → ${newLevelData.level}`,
+            reason: `Level up! ${user.level} -> ${newLevelData.level}`,
           },
-        }),
-      ]);
-    }
-  }
+        });
+      }
 
-  return NextResponse.json({
-    confirmed: true,
-    xpAwarded: totalXp,
-    skillsUpdated: detectedSkills.filter((s) => s.confidence >= 0.3).length,
-    levelUp,
-  });
+      return {
+        confirmed: true,
+        xpAwarded: totalXp,
+        skillsUpdated,
+        levelUp: isLevelUp ? { from: user.level, to: newLevelData.level } : null,
+      };
+    });
+
+    return NextResponse.json(result);
+  } catch (error: unknown) {
+    const err = error as Error;
+    return NextResponse.json(
+      { error: err.message || "Failed to confirm analysis" }, 
+      { status: err.message === "User not found" || err.message === "Analysis not found" ? 404 : 400 }
+    );
+  }
 }

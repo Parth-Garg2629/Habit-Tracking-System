@@ -205,7 +205,7 @@ export function RoadmapNodeCard({
 
           {/* Children row/col */}
           <div className={cn("flex", viewMode === "tree" ? "gap-4" : "flex-col gap-6 mt-6")}>
-            {node.children.map((child, index) => (
+            {node.children.map((child) => (
               <div
                 key={child.id}
                 className="flex flex-col items-center"

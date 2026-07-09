@@ -28,13 +28,13 @@ export default function SignInPage() {
       });
 
       if (res?.error) {
-        setError("Invalid credentials. Try demo@thesystem.app / hunter123");
+        setError("Invalid email or password");
         setLoading(false);
       } else {
         router.push("/dashboard");
         router.refresh();
       }
-    } catch (_err) {
+    } catch {
       setError("An error occurred. Please try again.");
       setLoading(false);
     }
