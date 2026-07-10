@@ -22,14 +22,14 @@ export function SkillCard({ skill }: { skill: Skill }) {
   return (
     <Card
       className={cn(
-        "group relative overflow-hidden",
+        "group relative overflow-hidden rounded-none",
         "bg-card/60 backdrop-blur-xl border border-white/[0.06]",
         "hover:bg-card/80 hover:border-white/[0.1] hover:shadow-lg hover:shadow-primary/5",
         "hover:-translate-y-1 transition-all duration-300"
       )}
     >
       {/* Gradient accent bar at top */}
-      <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary via-emerald-400 to-amber-400 opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute inset-x-0 top-0 h-[2px] bg-primary opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
 
       <CardHeader className="pb-3 pt-5">
         <div className="flex items-start justify-between">
@@ -37,16 +37,16 @@ export function SkillCard({ skill }: { skill: Skill }) {
             <CardTitle className="text-base truncate font-semibold" title={skill.name}>
               {skill.name}
             </CardTitle>
-            <Badge className={cn("mt-1.5 text-[10px] px-1.5 py-0 border-0", colorClass)}>
+            <Badge className={cn("mt-1.5 text-[10px] px-1.5 py-0 border-0 rounded-none", colorClass)}>
               {label}
             </Badge>
           </div>
 
-          {/* Glowing circular level indicator */}
+          {/* Glowing angular level indicator */}
           <div className="relative flex-shrink-0">
             <div
               className={cn(
-                "flex h-11 w-11 items-center justify-center rounded-full",
+                "flex h-11 w-11 items-center justify-center rounded-none",
                 "bg-primary/10 border border-primary/30",
                 "shadow-[0_0_12px_rgba(16,185,129,0.25)]",
                 "group-hover:shadow-[0_0_20px_rgba(16,185,129,0.4)]",
@@ -58,7 +58,7 @@ export function SkillCard({ skill }: { skill: Skill }) {
               </span>
             </div>
             {/* Subtle glow ring */}
-            <div className="absolute inset-0 rounded-full bg-primary/5 blur-md -z-10" />
+            <div className="absolute inset-0 rounded-none bg-primary/5 blur-md -z-10" />
           </div>
         </div>
       </CardHeader>
@@ -75,10 +75,10 @@ export function SkillCard({ skill }: { skill: Skill }) {
             <span className="font-medium text-foreground/70">{progressPercent}%</span>
           </div>
 
-          {/* Progress bar with gradient fill effect */}
-          <div className="relative h-2 w-full overflow-hidden rounded-full bg-secondary/50">
+          {/* Progress bar with sharp fill effect */}
+          <div className="relative h-2 w-full overflow-hidden rounded-none bg-secondary/50">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-primary via-emerald-400 to-amber-400 transition-all duration-500 ease-out"
+              className="h-full rounded-none bg-primary transition-all duration-500 ease-out"
               style={{ width: `${progressPercent}%` }}
             />
             {/* Shimmer effect on hover */}

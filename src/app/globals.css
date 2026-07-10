@@ -4,26 +4,26 @@
 
 @layer base {
   :root {
-    --background: 222 22% 9%;
-    --foreground: 210 20% 96%;
-    --card: 224 20% 12%;
-    --card-foreground: 210 20% 96%;
-    --popover: 224 20% 12%;
-    --popover-foreground: 210 20% 96%;
-    --primary: 166 72% 44%;
-    --primary-foreground: 180 32% 8%;
-    --secondary: 222 15% 18%;
-    --secondary-foreground: 210 20% 96%;
-    --muted: 222 14% 16%;
-    --muted-foreground: 215 12% 68%;
-    --accent: 37 88% 58%;
-    --accent-foreground: 32 42% 10%;
+    --background: 222 47% 4%;
+    --foreground: 210 20% 98%;
+    --card: 222 47% 6%;
+    --card-foreground: 210 20% 98%;
+    --popover: 222 47% 6%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 190 90% 50%;
+    --primary-foreground: 222 47% 4%;
+    --secondary: 222 47% 10%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 222 47% 10%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 230 100% 65%;
+    --accent-foreground: 210 20% 98%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 210 20% 98%;
-    --border: 222 14% 22%;
-    --input: 222 14% 22%;
-    --ring: 166 72% 44%;
-    --radius: 0.5rem;
+    --border: 190 90% 50%;
+    --input: 222 47% 10%;
+    --ring: 190 90% 50%;
+    --radius: 0.125rem;
   }
 
   * {
@@ -55,10 +55,10 @@
     @apply hover:bg-card/80 hover:border-white/[0.1] hover:shadow-lg hover:shadow-primary/5;
   }
   .glow-primary {
-    box-shadow: 0 0 20px hsl(166 72% 44% / 0.15), 0 0 60px hsl(166 72% 44% / 0.05);
+    box-shadow: 0 0 20px hsl(190 90% 50% / 0.15), 0 0 60px hsl(190 90% 50% / 0.05);
   }
   .glow-accent {
-    box-shadow: 0 0 20px hsl(37 88% 58% / 0.15), 0 0 60px hsl(37 88% 58% / 0.05);
+    box-shadow: 0 0 20px hsl(230 100% 65% / 0.15), 0 0 60px hsl(230 100% 65% / 0.05);
   }
   .glow-purple {
     box-shadow: 0 0 20px hsl(270 72% 55% / 0.15), 0 0 60px hsl(270 72% 55% / 0.05);

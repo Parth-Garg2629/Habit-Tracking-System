@@ -23,15 +23,12 @@ export function RoadmapCard({ roadmap, onDelete }: RoadmapCardProps) {
   return (
     <Card
       className={cn(
-        "group relative overflow-hidden",
-        "bg-card/60 backdrop-blur-xl border border-white/[0.06]",
+        "group relative overflow-hidden rounded-none",
+        "bg-card/60 backdrop-blur-xl border border-white/[0.06] border-l-4 border-l-primary",
         "hover:bg-card/80 hover:border-white/[0.1] hover:shadow-lg hover:shadow-primary/5",
         "hover:-translate-y-1 transition-all duration-300"
       )}
     >
-      {/* Gradient accent on the left edge */}
-      <div className="absolute inset-y-0 left-0 w-[2px] bg-gradient-to-b from-primary via-emerald-400 to-amber-400 opacity-50 group-hover:opacity-100 transition-opacity duration-300" />
-
       <CardHeader className="pb-3 pl-5">
         <div className="flex items-start justify-between">
           <div className="flex-1 min-w-0">
@@ -49,7 +46,7 @@ export function RoadmapCard({ roadmap, onDelete }: RoadmapCardProps) {
           <div className="relative flex-shrink-0">
             <div
               className={cn(
-                "flex h-10 w-10 items-center justify-center rounded-xl",
+                "flex h-10 w-10 items-center justify-center rounded-none",
                 "bg-primary/10 border border-primary/20",
                 "shadow-[0_0_10px_rgba(16,185,129,0.2)]",
                 "group-hover:shadow-[0_0_16px_rgba(16,185,129,0.35)]",
@@ -58,7 +55,7 @@ export function RoadmapCard({ roadmap, onDelete }: RoadmapCardProps) {
             >
               <GitBranch className="h-5 w-5 text-primary" />
             </div>
-            <div className="absolute inset-0 rounded-xl bg-primary/5 blur-md -z-10" />
+            <div className="absolute inset-0 rounded-none bg-primary/5 blur-md -z-10" />
           </div>
         </div>
       </CardHeader>
@@ -68,7 +65,7 @@ export function RoadmapCard({ roadmap, onDelete }: RoadmapCardProps) {
           <div className="flex items-center gap-2">
             <Badge
               variant="secondary"
-              className="text-[10px] px-2 py-0.5 bg-secondary/60 border border-white/[0.06] text-muted-foreground"
+              className="text-[10px] px-2 py-0.5 rounded-none bg-secondary/60 border border-white/[0.06] text-muted-foreground"
             >
               {roadmap.nodeCount} {roadmap.nodeCount === 1 ? "node" : "nodes"}
             </Badge>
@@ -80,7 +77,7 @@ export function RoadmapCard({ roadmap, onDelete }: RoadmapCardProps) {
             <Button
               variant="ghost"
               size="icon"
-              className="h-7 w-7 text-muted-foreground/60 hover:text-destructive hover:bg-destructive/10 opacity-0 group-hover:opacity-100 transition-all duration-200"
+              className="h-7 w-7 rounded-none text-muted-foreground/60 hover:text-destructive hover:bg-destructive/10 opacity-0 group-hover:opacity-100 transition-all duration-200"
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -93,7 +90,7 @@ export function RoadmapCard({ roadmap, onDelete }: RoadmapCardProps) {
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-7 w-7 text-muted-foreground/60 hover:text-primary hover:bg-primary/10 transition-colors duration-200"
+                className="h-7 w-7 rounded-none text-muted-foreground/60 hover:text-primary hover:bg-primary/10 transition-colors duration-200"
               >
                 <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform duration-200" />
               </Button>

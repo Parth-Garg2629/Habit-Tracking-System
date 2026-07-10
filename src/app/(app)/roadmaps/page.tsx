@@ -8,26 +8,23 @@ import { Badge } from "@/components/ui/badge";
 
 function RoadmapCardSkeleton() {
   return (
-    <div className="relative overflow-hidden rounded-xl bg-card/60 backdrop-blur-xl border border-white/[0.06] p-5">
-      {/* Left accent bar */}
-      <div className="absolute inset-y-0 left-0 w-[2px] bg-gradient-to-b from-primary/30 via-emerald-400/30 to-amber-400/30" />
-
+    <div className="relative overflow-hidden rounded-none bg-card/60 backdrop-blur-xl border border-white/[0.06] border-l-4 border-l-primary p-5">
       <div className="flex items-start justify-between pl-1">
         <div className="space-y-2 flex-1">
-          <div className="h-5 w-32 rounded-md bg-secondary/60 animate-pulse" />
-          <div className="h-3 w-44 rounded bg-secondary/40 animate-pulse" />
+          <div className="h-5 w-32 rounded-none bg-secondary/60 animate-pulse" />
+          <div className="h-3 w-44 rounded-none bg-secondary/40 animate-pulse" />
         </div>
-        <div className="h-10 w-10 rounded-xl bg-secondary/50 animate-pulse" />
+        <div className="h-10 w-10 rounded-none bg-secondary/50 animate-pulse" />
       </div>
 
       <div className="flex items-center justify-between mt-4 pl-1">
         <div className="flex items-center gap-2">
-          <div className="h-4 w-16 rounded-full bg-secondary/40 animate-pulse" />
-          <div className="h-3 w-24 rounded bg-secondary/30 animate-pulse" />
+          <div className="h-4 w-16 rounded-none bg-secondary/40 animate-pulse" />
+          <div className="h-3 w-24 rounded-none bg-secondary/30 animate-pulse" />
         </div>
         <div className="flex gap-1">
-          <div className="h-7 w-7 rounded bg-secondary/30 animate-pulse" />
-          <div className="h-7 w-7 rounded bg-secondary/30 animate-pulse" />
+          <div className="h-7 w-7 rounded-none bg-secondary/30 animate-pulse" />
+          <div className="h-7 w-7 rounded-none bg-secondary/30 animate-pulse" />
         </div>
       </div>
     </div>
@@ -45,17 +42,17 @@ export default function RoadmapsPage() {
         <div>
           <p className="text-sm text-muted-foreground flex items-center gap-1.5">
             <Map className="h-3.5 w-3.5 text-primary" />
-            Learning Paths
+            System Goals
           </p>
           <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent">
-            My Roadmaps
+            Quest Progression
           </h1>
         </div>
         <div className="flex items-center gap-3">
           {!loading && roadmaps.length > 0 && (
             <Badge
               variant="secondary"
-              className="bg-primary/10 text-primary border border-primary/20 px-3 py-1 text-xs font-medium shadow-[0_0_10px_rgba(16,185,129,0.15)]"
+              className="rounded-none bg-primary/10 text-primary border border-primary/20 px-3 py-1 text-xs font-medium shadow-[0_0_10px_rgba(16,185,129,0.15)]"
             >
               {roadmaps.length} {roadmaps.length === 1 ? "roadmap" : "roadmaps"}
             </Badge>
@@ -69,8 +66,8 @@ export default function RoadmapsPage() {
       </div>
 
       {error && (
-        <div className="rounded-xl border border-destructive/30 bg-destructive/10 backdrop-blur-sm p-4 text-sm text-destructive flex items-center gap-2">
-          <div className="h-2 w-2 rounded-full bg-destructive animate-pulse" />
+        <div className="rounded-none border border-destructive/30 bg-destructive/10 backdrop-blur-sm p-4 text-sm text-destructive flex items-center gap-2">
+          <div className="h-2 w-2 rounded-none bg-destructive animate-pulse" />
           {error}
         </div>
       )}
@@ -88,13 +85,13 @@ export default function RoadmapsPage() {
           ))}
         </div>
       ) : roadmaps.length === 0 ? (
-        <div className="text-center py-24 rounded-xl bg-card/40 backdrop-blur-xl border border-white/[0.06]">
+        <div className="text-center py-24 rounded-none bg-card/40 backdrop-blur-xl border border-white/[0.06]">
           {/* Glowing icon */}
           <div className="relative inline-flex">
-            <div className="flex h-16 w-16 mx-auto items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+            <div className="flex h-16 w-16 mx-auto items-center justify-center rounded-none bg-primary/10 border border-primary/20 shadow-[0_0_30px_rgba(16,185,129,0.2)]">
               <GitBranch className="h-7 w-7 text-primary" />
             </div>
-            <div className="absolute inset-0 rounded-2xl bg-primary/10 blur-xl -z-10" />
+            <div className="absolute inset-0 rounded-none bg-primary/10 blur-xl -z-10" />
           </div>
           <p className="text-muted-foreground mt-5 font-medium">
             No roadmaps yet
