@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("Seeding database...");
 
-  // Create demo user
+  // Create demo user (Player)
   const passwordHash = await hash("hunter123", 10);
   
   const user = await prisma.user.upsert({
@@ -14,31 +14,14 @@ async function main() {
     update: {},
     create: {
       email: "demo@thesystem.app",
-      name: "Hunter",
+      name: "Sung Jin-Woo",
       passwordHash,
-      level: 5,
-      xp: 450,
+      level: 1,
+      xp: 0,
     },
   });
 
-  console.log(`Created demo user: ${user.email}`);
-
-  // Create some initial skills
-  const skills = [
-    { name: "TypeScript", category: "language", xp: 120, level: 2 },
-    { name: "React", category: "framework", xp: 350, level: 3 },
-    { name: "System Design", category: "concept", xp: 50, level: 1 },
-    { name: "Deep Work", category: "soft_skill", xp: 210, level: 3 },
-  ];
-
-  for (const skill of skills) {
-    await prisma.skill.create({
-      data: {
-        ...skill,
-        userId: user.id,
-      },
-    });
-  }
+  console.log(`Created new Player: ${user.name} (${user.email})`);
 
   console.log("Seeding finished.");
 }
