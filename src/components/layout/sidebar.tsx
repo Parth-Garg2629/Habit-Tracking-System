@@ -17,7 +17,7 @@ export function Sidebar() {
       <div className="absolute inset-y-0 left-0 w-[2px] bg-gradient-to-b from-primary/0 via-primary to-primary/0 animate-scanline" />
 
       {/* Main sidebar content */}
-      <div className="flex h-full flex-col glass border-r border-primary/20 bg-background/80 px-4 py-5 backdrop-blur-md">
+      <div className="flex h-full flex-col glass border-r border-primary/20 bg-blue-900/20 px-4 py-5 backdrop-blur-md">
         {/* Logo */}
         <Link href="/dashboard" className="group flex items-center gap-3 px-2">
           <div className="relative flex h-10 w-10 items-center justify-center rounded-none bg-primary/15 text-primary transition-all duration-300 group-hover:bg-primary/25 border border-primary/30 glow-primary">
@@ -26,7 +26,7 @@ export function Sidebar() {
           </div>
           <div>
             <p className="font-bold tracking-tight text-primary shadow-primary drop-shadow-[0_0_8px_rgba(0,255,255,0.8)]">
-              The System [Solo Leveling]
+              [ THE SYSTEM ]
             </p>
             <p className="text-[11px] font-medium uppercase tracking-widest text-primary/70">
               Status OS
@@ -57,7 +57,9 @@ export function Sidebar() {
                   )}
                 />
 
-                <span className={cn("tracking-wide uppercase text-xs", isActive && "font-bold shadow-primary")}>{item.title}</span>
+                <span className={cn("tracking-wide uppercase text-xs", isActive && "font-bold shadow-primary")}>
+                  [ {item.title} ]
+                </span>
 
                 {/* Subtle gradient overlay on active */}
                 {isActive && (
@@ -98,13 +100,13 @@ export function Sidebar() {
               </div>
 
               {/* XP Progress Bar */}
-              <div className="relative h-1.5 w-full overflow-hidden rounded-none border border-primary/20 bg-background/50">
+              <div className="relative h-[2px] w-full overflow-hidden bg-background/50">
                 <div
-                  className="h-full rounded-none bg-primary transition-all duration-700 ease-out shadow-[0_0_10px_rgba(0,255,255,0.8)]"
+                  className="h-full bg-primary transition-all duration-700 ease-out shadow-[0_0_10px_rgba(0,255,255,0.8)]"
                   style={{ width: `${player.progressPercent}%` }}
                 />
                 <div
-                  className="absolute top-0 h-full rounded-none bg-primary blur-[2px] opacity-70"
+                  className="absolute top-0 h-full bg-primary blur-[2px] opacity-70"
                   style={{ width: `${player.progressPercent}%` }}
                 />
               </div>

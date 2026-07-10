@@ -4,26 +4,26 @@
 
 @layer base {
   :root {
-    --background: 222 47% 4%;
-    --foreground: 210 20% 98%;
-    --card: 222 47% 6%;
-    --card-foreground: 210 20% 98%;
-    --popover: 222 47% 6%;
-    --popover-foreground: 210 20% 98%;
-    --primary: 190 90% 50%;
-    --primary-foreground: 222 47% 4%;
-    --secondary: 222 47% 10%;
-    --secondary-foreground: 210 20% 98%;
-    --muted: 222 47% 10%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 230 100% 65%;
-    --accent-foreground: 210 20% 98%;
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 210 20% 98%;
-    --border: 190 90% 50%;
-    --input: 222 47% 10%;
-    --ring: 190 90% 50%;
-    --radius: 0.125rem;
+    --background: 220 50% 5%;
+    --foreground: 190 20% 90%;
+    --card: 215 50% 12%;
+    --card-foreground: 190 20% 90%;
+    --popover: 215 50% 12%;
+    --popover-foreground: 190 20% 90%;
+    --primary: 190 90% 55%;
+    --primary-foreground: 220 50% 5%;
+    --secondary: 215 50% 20%;
+    --secondary-foreground: 190 20% 90%;
+    --muted: 215 50% 15%;
+    --muted-foreground: 190 30% 60%;
+    --accent: 190 90% 55%;
+    --accent-foreground: 220 50% 5%;
+    --destructive: 0 80% 50%;
+    --destructive-foreground: 190 20% 90%;
+    --border: 190 90% 55%;
+    --input: 215 50% 20%;
+    --ring: 190 90% 55%;
+    --radius: 0rem;
   }
 
   * {
@@ -49,10 +49,13 @@
 
 @layer utilities {
   .glass {
-    @apply bg-card/60 backdrop-blur-xl border border-white/[0.06];
+    @apply bg-blue-900/30 backdrop-blur-md border border-primary/50 shadow-[0_0_15px_rgba(0,255,255,0.1)];
   }
   .glass-hover {
-    @apply hover:bg-card/80 hover:border-white/[0.1] hover:shadow-lg hover:shadow-primary/5;
+    @apply hover:bg-blue-900/40 hover:border-primary hover:shadow-[0_0_20px_rgba(0,255,255,0.3)] transition-all duration-300;
+  }
+  .system-border {
+    @apply border border-primary shadow-[0_0_10px_rgba(0,255,255,0.2)_inset,0_0_10px_rgba(0,255,255,0.2)];
   }
   .glow-primary {
     box-shadow: 0 0 20px hsl(190 90% 50% / 0.15), 0 0 60px hsl(190 90% 50% / 0.05);

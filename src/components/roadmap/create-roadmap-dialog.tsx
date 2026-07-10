@@ -44,9 +44,9 @@ export function CreateRoadmapDialog({ onCreate }: CreateRoadmapDialogProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="gap-2">
+        <Button className="gap-2 rounded-none bg-blue-900/50 border border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/20">
           <Plus className="h-4 w-4" />
-          New Roadmap
+          [ CREATE QUEST ]
         </Button>
       </DialogTrigger>
       <DialogContent>

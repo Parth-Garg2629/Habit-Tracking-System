@@ -23,22 +23,19 @@ export function SkillCard({ skill }: { skill: Skill }) {
     <Card
       className={cn(
         "group relative overflow-hidden rounded-none",
-        "bg-card/60 backdrop-blur-xl border border-white/[0.06]",
-        "hover:bg-card/80 hover:border-white/[0.1] hover:shadow-lg hover:shadow-primary/5",
+        "glass system-border",
+        "hover:bg-blue-900/40 hover:border-cyan-400/60 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)]",
         "hover:-translate-y-1 transition-all duration-300"
       )}
     >
-      {/* Gradient accent bar at top */}
-      <div className="absolute inset-x-0 top-0 h-[2px] bg-primary opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
-
       <CardHeader className="pb-3 pt-5">
         <div className="flex items-start justify-between">
           <div className="min-w-0 flex-1">
-            <CardTitle className="text-base truncate font-semibold" title={skill.name}>
-              {skill.name}
+            <CardTitle className="text-base truncate font-semibold text-cyan-400" title={`[ ${skill.name} ]`}>
+              [ {skill.name} ]
             </CardTitle>
-            <Badge className={cn("mt-1.5 text-[10px] px-1.5 py-0 border-0 rounded-none", colorClass)}>
-              {label}
+            <Badge className={cn("mt-1.5 text-[10px] px-1.5 py-0 border-0 rounded-none text-white bg-transparent opacity-80", colorClass)}>
+              [ {label} ]
             </Badge>
           </div>
 
@@ -47,18 +44,16 @@ export function SkillCard({ skill }: { skill: Skill }) {
             <div
               className={cn(
                 "flex h-11 w-11 items-center justify-center rounded-none",
-                "bg-primary/10 border border-primary/30",
-                "shadow-[0_0_12px_rgba(16,185,129,0.25)]",
-                "group-hover:shadow-[0_0_20px_rgba(16,185,129,0.4)]",
+                "bg-blue-950/50 border border-cyan-400/30",
+                "shadow-[0_0_12px_rgba(34,211,238,0.25)]",
+                "group-hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]",
                 "transition-shadow duration-300"
               )}
             >
-              <span className={cn("text-lg font-bold", tier.color)}>
+              <span className={cn("text-lg font-bold text-cyan-400")}>
                 {level}
               </span>
             </div>
-            {/* Subtle glow ring */}
-            <div className="absolute inset-0 rounded-none bg-primary/5 blur-md -z-10" />
           </div>
         </div>
       </CardHeader>
@@ -66,27 +61,25 @@ export function SkillCard({ skill }: { skill: Skill }) {
       <CardContent>
         <div className="space-y-2 mt-1">
           {/* Tier label */}
-          <span className={cn("text-[10px] font-medium", tier.color)}>
-            {tier.name}
+          <span className={cn("text-[10px] font-medium text-cyan-200")}>
+            [ {tier.name} ]
           </span>
 
-          <div className="flex items-center justify-between text-xs text-muted-foreground">
+          <div className="flex items-center justify-between text-xs text-cyan-100/70">
             <span>{currentLevelXp.toLocaleString()} / {xpForNextLevel.toLocaleString()} XP</span>
-            <span className="font-medium text-foreground/70">{progressPercent}%</span>
+            <span className="font-medium text-cyan-400">{progressPercent}%</span>
           </div>
 
-          {/* Progress bar with sharp fill effect */}
-          <div className="relative h-2 w-full overflow-hidden rounded-none bg-secondary/50">
+          {/* Progress bar with thin cyan line */}
+          <div className="relative h-[2px] w-full overflow-hidden rounded-none bg-blue-950/80">
             <div
-              className="h-full rounded-none bg-primary transition-all duration-500 ease-out"
+              className="h-[2px] rounded-none bg-cyan-400 transition-all duration-500 ease-out"
               style={{ width: `${progressPercent}%` }}
             />
-            {/* Shimmer effect on hover */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 -translate-x-full group-hover:translate-x-full" style={{ transitionDuration: "1s" }} />
           </div>
 
-          <p className="text-right text-[10px] text-muted-foreground/70 mt-1">
-            Total XP: <span className="text-muted-foreground">{skill.xp.toLocaleString()}</span>
+          <p className="text-right text-[10px] text-cyan-100/50 mt-1">
+            Total XP: <span className="text-cyan-100/80">{skill.xp.toLocaleString()}</span>
           </p>
         </div>
       </CardContent>
