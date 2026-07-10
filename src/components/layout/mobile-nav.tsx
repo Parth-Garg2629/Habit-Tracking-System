@@ -13,11 +13,12 @@ export function MobileNav() {
 
   return (
     <nav 
-      className="md:hidden bg-surface/60 backdrop-blur-xl font-label-caps text-label-caps font-display-lg text-primary shadow-[0_0_15px_rgba(34,211,238,0.2)] fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-[72px] pb-safe border-t-0 border-transparent"
-      style={{ borderTop: "1px solid transparent", boxShadow: "0 -4px 15px -3px rgba(34,211,238,0.1)" }}
+      className="md:hidden bg-surface/60 backdrop-blur-xl font-label-caps text-label-caps font-display-lg text-primary shadow-[0_0_15px_rgba(34,211,238,0.2)] fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-[72px] pb-safe border-t border-primary/10"
+      style={{ boxShadow: "0 -4px 15px -3px rgba(34,211,238,0.1)" }}
     >
       {bottomNavItems.map((item) => {
         const isActive = pathname === item.href;
+        const Icon = item.icon;
 
         return (
           <Link
@@ -30,9 +31,7 @@ export function MobileNav() {
                 : "text-outline hover:text-primary-container opacity-80"
             )}
           >
-            <span className="material-symbols-outlined text-xl" style={isActive ? { fontVariationSettings: "'FILL' 1" } : {}}>
-              {item.materialIcon}
-            </span>
+            <Icon className="h-5 w-5" />
             <span className="text-[9px] tracking-wider font-bold uppercase">{item.shortTitle}</span>
           </Link>
         );

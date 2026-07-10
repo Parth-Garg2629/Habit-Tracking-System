@@ -16,8 +16,7 @@ export function Sidebar() {
 
   return (
     <nav 
-      className="hidden md:flex bg-surface/60 backdrop-blur-xl font-label-caps text-label-caps font-display-lg text-primary shadow-[5px_0_15px_rgba(34,211,238,0.1)] fixed left-0 top-16 h-[calc(100vh-64px)] z-40 flex-col py-gutter w-20 hover:w-64 transition-all duration-500 overflow-hidden group border-r-0 border-transparent"
-      style={{ borderRight: "1px solid transparent" }}
+      className="hidden md:flex bg-surface/60 backdrop-blur-xl font-label-caps text-label-caps font-display-lg text-primary shadow-[5px_0_15px_rgba(34,211,238,0.1)] fixed left-0 top-16 h-[calc(100vh-64px)] z-40 flex-col py-gutter w-20 hover:w-64 transition-all duration-500 overflow-hidden group border-r border-primary/10"
     >
       {/* User Profile Area */}
       <div className="flex items-center gap-4 px-4 mb-8 w-64 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100 whitespace-nowrap">
@@ -33,6 +32,7 @@ export function Sidebar() {
       <div className="flex-1 flex flex-col gap-2 px-2 w-64">
         {navItems.map((item) => {
           const isActive = pathname === item.href || (pathname.startsWith(item.href) && item.href !== "/dashboard");
+          const Icon = item.icon;
 
           return (
             <Link
@@ -45,9 +45,7 @@ export function Sidebar() {
                   : "text-outline opacity-70 border-transparent hover:bg-primary/5 hover:text-primary-container hover:translate-x-1"
               )}
             >
-              <span className="material-symbols-outlined shrink-0 text-xl" style={isActive ? { fontVariationSettings: "'FILL' 1" } : {}}>
-                {item.materialIcon}
-              </span>
+              <Icon className="h-5 w-5 shrink-0 text-xl" />
               <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap tracking-widest">
                 {item.title}
               </span>

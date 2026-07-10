@@ -3,33 +3,34 @@
 import React from "react";
 import { Sidebar } from "@/components/layout/sidebar";
 import { MobileNav } from "@/components/layout/mobile-nav";
+import { User, Trophy, Zap, Database, Terminal } from "lucide-react";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* TopNavBar */}
       <header 
-        className="bg-surface/60 backdrop-blur-xl font-display-lg text-display-lg font-headline-md text-headline-md font-label-caps text-label-caps top-0 shadow-[0_0_15px_rgba(34,211,238,0.2)] flex justify-between items-center w-full px-margin-safe h-16 z-50 fixed border-b-0 border-transparent pb-0 mb-0" 
-        style={{ borderBottom: "1px solid transparent", boxShadow: "0 4px 15px -3px rgba(34,211,238,0.1)" }}
+        className="bg-surface/60 backdrop-blur-xl font-display-lg top-0 shadow-[0_0_15px_rgba(34,211,238,0.2)] flex justify-between items-center w-full px-margin-safe h-16 z-50 fixed border-b border-primary/10 pb-0 mb-0" 
+        style={{ boxShadow: "0 4px 15px -3px rgba(34,211,238,0.1)" }}
       >
         {/* Brand */}
         <div className="font-display-lg text-headline-md tracking-[0.2em] text-primary drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] flex items-center gap-2">
-          <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>terminal</span>
+          <Terminal className="h-5 w-5 text-primary" />
           AETHER[OS]
         </div>
         {/* Trailing Actions (Web only) */}
-        <div className="hidden md:flex items-center gap-unit">
-          <button className="p-2 text-outline hover:text-primary-container transition-all duration-300 hover:scale-95 active:scale-95 opacity-80 rounded-full" title="Profile">
-            <span className="material-symbols-outlined">account_circle</span>
+        <div className="hidden md:flex items-center gap-2">
+          <button className="p-2 text-outline hover:text-primary transition-all duration-300 hover:scale-95 active:scale-95 opacity-80 rounded-full" title="Profile">
+            <User className="h-5 w-5" />
           </button>
-          <button className="p-2 text-outline hover:text-primary-container transition-all duration-300 hover:scale-95 active:scale-95 opacity-80 rounded-full" title="Achievements">
-            <span className="material-symbols-outlined">military_tech</span>
+          <button className="p-2 text-outline hover:text-primary transition-all duration-300 hover:scale-95 active:scale-95 opacity-80 rounded-full" title="Achievements">
+            <Trophy className="h-5 w-5" />
           </button>
-          <button className="p-2 text-outline hover:text-primary-container transition-all duration-300 hover:scale-95 active:scale-95 opacity-80 rounded-full" title="Power">
-            <span className="material-symbols-outlined">electric_bolt</span>
+          <button className="p-2 text-outline hover:text-primary transition-all duration-300 hover:scale-95 active:scale-95 opacity-80 rounded-full" title="Power">
+            <Zap className="h-5 w-5" />
           </button>
-          <button className="p-2 text-outline hover:text-primary-container transition-all duration-300 hover:scale-95 active:scale-95 opacity-80 rounded-full" title="Data Sync">
-            <span className="material-symbols-outlined">database</span>
+          <button className="p-2 text-outline hover:text-primary transition-all duration-300 hover:scale-95 active:scale-95 opacity-80 rounded-full" title="Data Sync">
+            <Database className="h-5 w-5" />
           </button>
         </div>
       </header>
