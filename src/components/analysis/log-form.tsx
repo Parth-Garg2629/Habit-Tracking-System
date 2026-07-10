@@ -1,9 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
 import { Brain, Send, Loader2, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { AnalyzePayload } from "@/types/analysis";
@@ -30,82 +27,92 @@ export function LogForm({ onSubmit, isAnalyzing }: LogFormProps) {
   const isValid = content.trim().length >= 10;
 
   return (
-    <Card>
-      <CardHeader className="pb-3">
-        <div className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-purple-500/15 text-purple-400">
-            <Brain className="h-5 w-5" />
+    <div className="glass-panel p-6 rounded-lg space-y-6 relative overflow-hidden">
+      <div className="flex items-center justify-between border-b border-primary/20 pb-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded bg-primary/10 border border-primary/40 flex items-center justify-center text-primary shadow-[0_0_10px_rgba(34,211,238,0.2)]">
+            <Brain className="h-5 w-5 animate-pulse" />
           </div>
           <div>
-            <CardTitle className="text-base">Learning Log</CardTitle>
-            <p className="text-xs text-muted-foreground mt-0.5">
-              Describe what you learned — AI will detect skills &amp; suggest XP
+            <h3 className="font-headline-sm text-headline-sm text-primary">TELEMETRY INGESTION TERMINAL</h3>
+            <p className="font-data-mono text-xs text-outline mt-0.5">
+              Input daily activities &mdash; AI Core will extract competencies and synthesize XP
             </p>
           </div>
         </div>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Textarea
-              placeholder="Today I worked on building a REST API with Express.js and learned about middleware patterns. I also debugged a tricky async/await issue with Promise.all and finally understood how error boundaries work in React..."
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              rows={6}
-              maxLength={5000}
-              className="resize-none bg-secondary/30 border-border/50 text-sm leading-relaxed placeholder:text-muted-foreground/50"
+        <div className="hidden sm:block font-data-mono text-[10px] text-tertiary-container border border-tertiary-container/30 px-2.5 py-1 rounded">
+          [ NLP_SYNTHESIS_READY ]
+        </div>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <div className="space-y-2">
+          <div className="flex items-center justify-between font-data-mono text-xs text-outline">
+            <span>ACTIVITY &amp; LEARNING STREAM</span>
+            <span className={cn(charCount > 0 && charCount < 10 ? "text-error font-bold" : "text-primary")}>
+              {charCount.toLocaleString()} / 5,000 BYTES
+            </span>
+          </div>
+          
+          <textarea
+            placeholder="[ TRANSMISSION START ] Today I engineered a custom JWT authentication service in Node.js, optimized SQL queries by indexing frequently accessed foreign keys, and resolved memory leaks inside a web worker thread..."
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            rows={6}
+            maxLength={5000}
+            className="w-full rounded bg-background/60 border border-primary/30 p-4 font-data-mono text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-inner placeholder:text-outline/40 transition-all resize-none"
+            disabled={isAnalyzing}
+          />
+
+          <div className="flex items-center justify-between text-xs font-data-mono text-outline">
+            <span className={cn(charCount > 0 && charCount < 10 && "text-error")}>
+              {charCount > 0 && charCount < 10 ? "[ ! ] MINIMUM 10 CHARACTERS REQUIRED FOR AI PARSING" : "[ SYSTEM READY ]"}
+            </span>
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-end justify-between gap-4 pt-2 border-t border-primary/10">
+          <div className="w-full sm:w-56">
+            <label className="flex items-center gap-1.5 font-data-mono text-xs text-outline mb-1.5">
+              <Clock className="h-3.5 w-3.5 text-secondary" />
+              DURATION (MINUTES)
+            </label>
+            <input
+              type="number"
+              min={1}
+              max={720}
+              placeholder="e.g., 60"
+              value={duration}
+              onChange={(e) => setDuration(e.target.value)}
+              className="w-full rounded bg-background/60 border border-primary/30 px-3 py-2 font-data-mono text-sm text-on-surface focus:outline-none focus:border-primary"
               disabled={isAnalyzing}
             />
-            <div className="flex items-center justify-between text-xs text-muted-foreground">
-              <span className={cn(charCount > 0 && charCount < 10 && "text-destructive")}>
-                {charCount > 0 && charCount < 10 ? "At least 10 characters required" : "\u00A0"}
-              </span>
-              <span>{charCount.toLocaleString()} / 5,000</span>
-            </div>
           </div>
 
-          <div className="flex items-end gap-3">
-            <div className="flex-1 max-w-[200px]">
-              <label className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1.5">
-                <Clock className="h-3 w-3" />
-                Duration (minutes)
-              </label>
-              <Input
-                type="number"
-                min={1}
-                max={720}
-                placeholder="e.g., 45"
-                value={duration}
-                onChange={(e) => setDuration(e.target.value)}
-                className="bg-secondary/30 border-border/50 text-sm"
-                disabled={isAnalyzing}
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={!isValid || isAnalyzing}
-              className={cn(
-                "flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-medium transition-all",
-                isValid && !isAnalyzing
-                  ? "bg-purple-600 text-white hover:bg-purple-500 shadow-lg shadow-purple-600/20"
-                  : "bg-secondary text-muted-foreground cursor-not-allowed"
-              )}
-            >
-              {isAnalyzing ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  Analyzing...
-                </>
-              ) : (
-                <>
-                  <Send className="h-4 w-4" />
-                  Analyze with AI
-                </>
-              )}
-            </button>
-          </div>
-        </form>
-      </CardContent>
-    </Card>
+          <button
+            type="submit"
+            disabled={!isValid || isAnalyzing}
+            className={cn(
+              "flex items-center justify-center gap-2.5 rounded px-6 py-3 font-data-mono text-sm font-bold tracking-wider transition-all duration-300",
+              isValid && !isAnalyzing
+                ? "bg-primary text-background hover:bg-primary-fixed shadow-[0_0_20px_rgba(34,211,238,0.5)] hover:scale-[1.02]"
+                : "bg-surface-variant/50 text-outline cursor-not-allowed border border-outline/20"
+            )}
+          >
+            {isAnalyzing ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                NEURAL PARSING IN PROGRESS...
+              </>
+            ) : (
+              <>
+                <Send className="h-4 w-4" />
+                TRANSMIT TO AI CORE
+              </>
+            )}
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }

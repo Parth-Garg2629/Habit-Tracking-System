@@ -2,44 +2,41 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Activity } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { navItems } from "@/components/layout/nav-items";
 
 export function MobileNav() {
   const pathname = usePathname();
 
-  return (
-    <header className="sticky top-0 z-30 border-b bg-background/95 backdrop-blur lg:hidden">
-      <div className="flex h-16 items-center gap-3 px-4">
-        <div className="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
-          <Activity className="h-5 w-5" />
-        </div>
-        <div>
-          <p className="font-semibold leading-tight">The System</p>
-          <p className="text-xs text-muted-foreground">Life OS</p>
-        </div>
-      </div>
-      <nav className="flex gap-1 overflow-x-auto px-3 pb-3">
-        {navItems.map((item) => {
-          const isActive = pathname === item.href;
-          const Icon = item.icon;
+  // Show first 4 items or most important items on bottom nav
+  const bottomNavItems = navItems.slice(0, 4);
 
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "flex shrink-0 items-center gap-2 rounded-md px-3 py-2 text-xs font-medium text-muted-foreground",
-                isActive && "bg-secondary text-foreground"
-              )}
-            >
-              <Icon className="h-4 w-4" />
-              {item.title}
-            </Link>
-          );
-        })}
-      </nav>
-    </header>
+  return (
+    <nav 
+      className="md:hidden bg-surface/60 backdrop-blur-xl font-label-caps text-label-caps font-display-lg text-primary shadow-[0_0_15px_rgba(34,211,238,0.2)] fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-[72px] pb-safe border-t-0 border-transparent"
+      style={{ borderTop: "1px solid transparent", boxShadow: "0 -4px 15px -3px rgba(34,211,238,0.1)" }}
+    >
+      {bottomNavItems.map((item) => {
+        const isActive = pathname === item.href;
+
+        return (
+          <Link
+            key={item.href}
+            href={item.href}
+            className={cn(
+              "flex flex-col items-center justify-center gap-1 w-full h-full transition-all duration-300",
+              isActive
+                ? "text-primary drop-shadow-[0_0_5px_rgba(34,211,238,0.8)] scale-95 opacity-100"
+                : "text-outline hover:text-primary-container opacity-80"
+            )}
+          >
+            <span className="material-symbols-outlined text-xl" style={isActive ? { fontVariationSettings: "'FILL' 1" } : {}}>
+              {item.materialIcon}
+            </span>
+            <span className="text-[9px] tracking-wider font-bold uppercase">{item.shortTitle}</span>
+          </Link>
+        );
+      })}
+    </nav>
   );
 }
