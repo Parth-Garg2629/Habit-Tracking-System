@@ -7,7 +7,7 @@ import { Shield, Loader2 } from "lucide-react";
 
 const levelTiers = [
   { name: "Novice", range: "1–5", color: "text-zinc-400", bg: "bg-zinc-400/10", border: "border-zinc-400/20" },
-  { name: "Apprentice", range: "6–10", color: "text-blue-400", bg: "bg-blue-400/10", border: "border-blue-400/20" },
+  { name: "Apprentice", range: "6–10", color: "text-blue-400", bg: "bg-violet-400/10", border: "border-blue-400/20" },
   { name: "Journeyman", range: "11–15", color: "text-emerald-400", bg: "bg-emerald-400/10", border: "border-emerald-400/20" },
   { name: "Expert", range: "16–20", color: "text-purple-400", bg: "bg-purple-400/10", border: "border-purple-400/20" },
   { name: "Master", range: "21–30", color: "text-amber-400", bg: "bg-amber-400/10", border: "border-amber-400/20" },

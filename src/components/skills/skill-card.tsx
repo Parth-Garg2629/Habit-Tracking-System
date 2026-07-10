@@ -24,7 +24,7 @@ export function SkillCard({ skill }: { skill: Skill }) {
       className={cn(
         "group relative overflow-hidden rounded-none",
         "glass system-border",
-        "hover:bg-blue-900/40 hover:border-cyan-400/60 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)]",
+        "hover:bg-violet-900/40 hover:border-cyan-400/60 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)]",
         "hover:-translate-y-1 transition-all duration-300"
       )}
     >
@@ -44,7 +44,7 @@ export function SkillCard({ skill }: { skill: Skill }) {
             <div
               className={cn(
                 "flex h-11 w-11 items-center justify-center rounded-none",
-                "bg-blue-950/50 border border-cyan-400/30",
+                "bg-violet-950/50 border border-cyan-400/30",
                 "shadow-[0_0_12px_rgba(34,211,238,0.25)]",
                 "group-hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]",
                 "transition-shadow duration-300"
@@ -71,7 +71,7 @@ export function SkillCard({ skill }: { skill: Skill }) {
           </div>
 
           {/* Progress bar with thin cyan line */}
-          <div className="relative h-[2px] w-full overflow-hidden rounded-none bg-blue-950/80">
+          <div className="relative h-[2px] w-full overflow-hidden rounded-none bg-violet-950/80">
             <div
               className="h-[2px] rounded-none bg-cyan-400 transition-all duration-500 ease-out"
               style={{ width: `${progressPercent}%` }}

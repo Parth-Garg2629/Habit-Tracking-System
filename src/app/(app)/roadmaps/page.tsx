@@ -11,20 +11,20 @@ function RoadmapCardSkeleton() {
     <div className="relative overflow-hidden rounded-none glass system-border border-l-4 border-l-cyan-400 p-5">
       <div className="flex items-start justify-between pl-1">
         <div className="space-y-2 flex-1">
-          <div className="h-5 w-32 rounded-none bg-blue-900/50 animate-pulse" />
-          <div className="h-3 w-44 rounded-none bg-blue-900/30 animate-pulse" />
+          <div className="h-5 w-32 rounded-none bg-violet-900/50 animate-pulse" />
+          <div className="h-3 w-44 rounded-none bg-violet-900/30 animate-pulse" />
         </div>
-        <div className="h-10 w-10 rounded-none bg-blue-900/40 animate-pulse" />
+        <div className="h-10 w-10 rounded-none bg-violet-900/40 animate-pulse" />
       </div>
 
       <div className="flex items-center justify-between mt-4 pl-1">
         <div className="flex items-center gap-2">
-          <div className="h-4 w-16 rounded-none bg-blue-900/40 animate-pulse" />
-          <div className="h-3 w-24 rounded-none bg-blue-900/30 animate-pulse" />
+          <div className="h-4 w-16 rounded-none bg-violet-900/40 animate-pulse" />
+          <div className="h-3 w-24 rounded-none bg-violet-900/30 animate-pulse" />
         </div>
         <div className="flex gap-1">
-          <div className="h-7 w-7 rounded-none bg-blue-900/30 animate-pulse" />
-          <div className="h-7 w-7 rounded-none bg-blue-900/30 animate-pulse" />
+          <div className="h-7 w-7 rounded-none bg-violet-900/30 animate-pulse" />
+          <div className="h-7 w-7 rounded-none bg-violet-900/30 animate-pulse" />
         </div>
       </div>
     </div>
@@ -50,7 +50,7 @@ export default function RoadmapsPage() {
           {!loading && roadmaps.length > 0 && (
             <Badge
               variant="secondary"
-              className="rounded-none bg-blue-900/30 text-cyan-400 border border-cyan-400/30 px-3 py-1 text-xs font-medium"
+              className="rounded-none bg-violet-900/30 text-cyan-400 border border-cyan-400/30 px-3 py-1 text-xs font-medium"
             >
               [ {roadmaps.length} {roadmaps.length === 1 ? "quest" : "quests"} ]
             </Badge>
@@ -86,7 +86,7 @@ export default function RoadmapsPage() {
         <div className="text-center py-24 rounded-none glass system-border">
           {/* Glowing icon */}
           <div className="relative inline-flex">
-            <div className="flex h-16 w-16 mx-auto items-center justify-center rounded-none bg-blue-950/50 border border-cyan-400/30 shadow-[0_0_30px_rgba(34,211,238,0.2)]">
+            <div className="flex h-16 w-16 mx-auto items-center justify-center rounded-none bg-violet-950/50 border border-cyan-400/30 shadow-[0_0_30px_rgba(34,211,238,0.2)]">
               <GitBranch className="h-7 w-7 text-cyan-400" />
             </div>
           </div>

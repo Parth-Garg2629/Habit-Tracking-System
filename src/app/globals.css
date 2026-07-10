@@ -4,24 +4,24 @@
 
 @layer base {
   :root {
-    --background: 220 50% 5%;
+    --background: 270 50% 5%;
     --foreground: 190 20% 90%;
-    --card: 215 50% 12%;
+    --card: 270 50% 8%;
     --card-foreground: 190 20% 90%;
-    --popover: 215 50% 12%;
+    --popover: 270 50% 8%;
     --popover-foreground: 190 20% 90%;
     --primary: 190 90% 55%;
-    --primary-foreground: 220 50% 5%;
-    --secondary: 215 50% 20%;
+    --primary-foreground: 270 50% 5%;
+    --secondary: 270 50% 12%;
     --secondary-foreground: 190 20% 90%;
-    --muted: 215 50% 15%;
+    --muted: 270 50% 10%;
     --muted-foreground: 190 30% 60%;
     --accent: 190 90% 55%;
-    --accent-foreground: 220 50% 5%;
+    --accent-foreground: 270 50% 5%;
     --destructive: 0 80% 50%;
     --destructive-foreground: 190 20% 90%;
     --border: 190 90% 55%;
-    --input: 215 50% 20%;
+    --input: 270 50% 12%;
     --ring: 190 90% 55%;
     --radius: 0rem;
   }
@@ -49,10 +49,10 @@
 
 @layer utilities {
   .glass {
-    @apply bg-blue-900/30 backdrop-blur-md border border-primary/50 shadow-[0_0_15px_rgba(0,255,255,0.1)];
+    @apply bg-violet-950/40 backdrop-blur-md border border-primary/50 shadow-[0_0_15px_rgba(0,255,255,0.1)];
   }
   .glass-hover {
-    @apply hover:bg-blue-900/40 hover:border-primary hover:shadow-[0_0_20px_rgba(0,255,255,0.3)] transition-all duration-300;
+    @apply hover:bg-violet-950/50 hover:border-primary hover:shadow-[0_0_20px_rgba(0,255,255,0.3)] transition-all duration-300;
   }
   .system-border {
     @apply border border-primary shadow-[0_0_10px_rgba(0,255,255,0.2)_inset,0_0_10px_rgba(0,255,255,0.2)];

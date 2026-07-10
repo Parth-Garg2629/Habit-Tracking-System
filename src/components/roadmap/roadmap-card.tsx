@@ -25,7 +25,7 @@ export function RoadmapCard({ roadmap, onDelete }: RoadmapCardProps) {
       className={cn(
         "group relative overflow-hidden rounded-none",
         "glass system-border border-l-4 border-l-cyan-400",
-        "hover:bg-blue-900/40 hover:border-cyan-400/60 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)]",
+        "hover:bg-violet-900/40 hover:border-cyan-400/60 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)]",
         "hover:-translate-y-1 transition-all duration-300"
       )}
     >
@@ -47,7 +47,7 @@ export function RoadmapCard({ roadmap, onDelete }: RoadmapCardProps) {
             <div
               className={cn(
                 "flex h-10 w-10 items-center justify-center rounded-none",
-                "bg-blue-950/50 border border-cyan-400/30",
+                "bg-violet-950/50 border border-cyan-400/30",
                 "shadow-[0_0_10px_rgba(34,211,238,0.2)]",
                 "group-hover:shadow-[0_0_16px_rgba(34,211,238,0.35)]",
                 "transition-shadow duration-300"
@@ -64,7 +64,7 @@ export function RoadmapCard({ roadmap, onDelete }: RoadmapCardProps) {
           <div className="flex items-center gap-2">
             <Badge
               variant="secondary"
-              className="text-[10px] px-2 py-0.5 rounded-none bg-blue-900/40 border border-cyan-400/20 text-cyan-200"
+              className="text-[10px] px-2 py-0.5 rounded-none bg-violet-900/40 border border-cyan-400/20 text-cyan-200"
             >
               [ {roadmap.nodeCount} {roadmap.nodeCount === 1 ? "node" : "nodes"} ]
             </Badge>

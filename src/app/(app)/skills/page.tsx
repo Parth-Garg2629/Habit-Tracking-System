@@ -10,20 +10,20 @@ function SkillCardSkeleton() {
     <div className="relative overflow-hidden rounded-none glass system-border p-5">
       <div className="flex items-start justify-between pt-1">
         <div className="space-y-2 flex-1">
-          <div className="h-5 w-28 rounded-none bg-blue-900/50 animate-pulse" />
-          <div className="h-4 w-16 rounded-none bg-blue-900/30 animate-pulse" />
+          <div className="h-5 w-28 rounded-none bg-violet-900/50 animate-pulse" />
+          <div className="h-4 w-16 rounded-none bg-violet-900/30 animate-pulse" />
         </div>
-        <div className="h-11 w-11 rounded-none bg-blue-900/40 animate-pulse" />
+        <div className="h-11 w-11 rounded-none bg-violet-900/40 animate-pulse" />
       </div>
 
       <div className="mt-5 space-y-2">
-        <div className="h-3 w-16 rounded-none bg-blue-900/30 animate-pulse" />
+        <div className="h-3 w-16 rounded-none bg-violet-900/30 animate-pulse" />
         <div className="flex justify-between">
-          <div className="h-3 w-24 rounded-none bg-blue-900/30 animate-pulse" />
-          <div className="h-3 w-8 rounded-none bg-blue-900/30 animate-pulse" />
+          <div className="h-3 w-24 rounded-none bg-violet-900/30 animate-pulse" />
+          <div className="h-3 w-8 rounded-none bg-violet-900/30 animate-pulse" />
         </div>
-        <div className="h-[2px] w-full rounded-none bg-blue-900/40 animate-pulse" />
-        <div className="h-2.5 w-20 rounded-none bg-blue-900/30 animate-pulse ml-auto" />
+        <div className="h-[2px] w-full rounded-none bg-violet-900/40 animate-pulse" />
+        <div className="h-2.5 w-20 rounded-none bg-violet-900/30 animate-pulse ml-auto" />
       </div>
     </div>
   );
@@ -46,7 +46,7 @@ export default function SkillsPage() {
         {!loading && skills.length > 0 && (
           <Badge
             variant="secondary"
-            className="mt-4 rounded-none bg-blue-900/30 text-cyan-400 border border-cyan-400/30 px-3 py-1 text-xs font-medium"
+            className="mt-4 rounded-none bg-violet-900/30 text-cyan-400 border border-cyan-400/30 px-3 py-1 text-xs font-medium"
           >
             [ {skills.length} {skills.length === 1 ? "skill" : "skills"} tracked ]
           </Badge>
@@ -69,7 +69,7 @@ export default function SkillsPage() {
         <div className="text-center py-24 rounded-none glass system-border">
           {/* Glowing icon */}
           <div className="relative inline-flex">
-            <div className="flex h-16 w-16 mx-auto items-center justify-center rounded-none bg-blue-950/50 border border-cyan-400/30 shadow-[0_0_30px_rgba(34,211,238,0.2)]">
+            <div className="flex h-16 w-16 mx-auto items-center justify-center rounded-none bg-violet-950/50 border border-cyan-400/30 shadow-[0_0_30px_rgba(34,211,238,0.2)]">
               <Zap className="h-7 w-7 text-cyan-400" />
             </div>
           </div>

@@ -17,7 +17,7 @@ export function Sidebar() {
       <div className="absolute inset-y-0 left-0 w-[2px] bg-gradient-to-b from-primary/0 via-primary to-primary/0 animate-scanline" />
 
       {/* Main sidebar content */}
-      <div className="flex h-full flex-col glass border-r border-primary/20 bg-blue-900/20 px-4 py-5 backdrop-blur-md">
+      <div className="flex h-full flex-col glass border-r border-primary/20 bg-violet-900/20 px-4 py-5 backdrop-blur-md">
         {/* Logo */}
         <Link href="/dashboard" className="group flex items-center gap-3 px-2">
           <div className="relative flex h-10 w-10 items-center justify-center rounded-none bg-primary/15 text-primary transition-all duration-300 group-hover:bg-primary/25 border border-primary/30 glow-primary">
